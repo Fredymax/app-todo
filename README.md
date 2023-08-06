@@ -1,16 +1,20 @@
-# Repositorio base del Curso de Introducción a React.js en Platzi
+# Proyecto de curso de React.js en Platzi
 
-¡Hola, Platzinauta!
+**Preview design**
 
-En este repositorio encontrarás el código de todas las clases del [Curso de Introducción a React.js](https://platzi.com/reactjs). Para empezar solo debes clonar este repositorio (`git clone`), instalar sus dependencias (`npm i`) y ejecutar la aplicación (`npm start`).
+<img src="./src/assets/desktop.png" title="Preview desktop" alt="Preview desktop" width="700" />
+<img src="./src/assets/mobile.png" title="Preview mobile" alt="Preview mobile" height="414" />
 
-La rama principal contiene el código con el que eempezamos el curso. En las demás ramas encontrarás el código de las siguientes clases y finalmente el deploy de la aplicación.
+## Raise the project
 
-¡Mucha suerte aprendiendo React! #NuncaParesDeAprender
+Open your terminal and run the following line
 
-## Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+git clone https://github.com/Fredymax/app-todo.git TodoAppFredyMax
+cd TodoAppFredyMax
+npm install
+npm run start
+```
 
 ## Available Scripts
 
@@ -73,3 +77,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
+
+```

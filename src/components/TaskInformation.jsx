@@ -1,9 +1,4 @@
-import React, { useContext } from "react";
-import { TodoContext } from "../context/TodoProvider";
-
-export const TaskInformation = () => {
-  const { counterTasks } = useContext(TodoContext);
-
+export const TaskInformation = ({ counterTasks }) => {
   return (
     <section className="information__container">
       <h1>Progress</h1>
@@ -29,5 +24,5 @@ export const TaskInformation = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}

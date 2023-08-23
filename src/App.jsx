@@ -1,54 +1,112 @@
-import React, { useContext } from "react";
-import { TaskInformation } from "./components/TaskInformation";
-import { TaskSection } from "./components/TaskSection";
-import { Task } from "./components/Task";
-import { TaskHeader } from "./components/TaskHeader";
-import { TaskForm } from "./components/TaskForm";
-import { Modal } from "./@core/components/Modal";
-import { DragContext } from "./components/DragContext";
-import { TodoContext } from "./context/TodoProvider";
+import { TaskInformation } from './components/TaskInformation'
+import { TaskSection } from './components/TaskSection'
+import { Task } from './components/Task'
+import { TaskHeader } from './components/TaskHeader'
+import { TaskForm } from './components/TaskForm'
+import { Modal } from './@core/components/Modal'
+import { DragContext } from './components/DragContext'
+import { useTodos } from './hooks/useTodos'
 
-import "./App.css";
-import "./App-mobile.css";
-
-import { TaskLoaderSkeleton } from "./components/TaskLoaderSkeleton";
+import { TaskLoaderSkeleton } from './components/TaskLoaderSkeleton'
+import { TaskSearch } from './components/TaskSearch'
 
 function App() {
-  const { openModal, todosStarter, todosOnGoing, todosCompleted, todoLoader } =
-    useContext(TodoContext);
+  const {
+    openModal,
+    todosStarter,
+    todosOnGoing,
+    todosCompleted,
+    todoLoader,
+    search,
+    setSearch,
+    setTodos,
+    todos,
+    todo,
+    setOpenModal,
+    counterTasks,
+    initialNewTodo,
+  } = useTodos()
+
   return (
     <div className="wrapper">
       <main className="task__container">
-        <TaskHeader />
-        <DragContext>
-          <TaskSection title="Starter" status="starter">
-            {todoLoader && <TaskLoaderSkeleton quantity={3} />}
-            {!!todosStarter.length &&
-              !todoLoader &&
-              todosStarter.map((todo, index) => <Task key={todo.id} index={index} {...todo} />)}
+        <TaskHeader title="Tasks">
+          <TaskSearch search={search} setSearch={setSearch} />
+        </TaskHeader>
+        <DragContext setTodos={setTodos} todos={todos}>
+          <TaskSection
+            todos={todosStarter}
+            todoLoader={todoLoader}
+            onTodoLoader={() => <TaskLoaderSkeleton />}
+            title="Starter"
+            status="starter"
+            setOpenModal={setOpenModal}
+            initialNewTodo={initialNewTodo}
+          >
+            {(todo, index) => (
+              <Task
+                key={todo.id}
+                index={index}
+                setTodos={setTodos}
+                todos={todos}
+                {...todo}
+              />
+            )}
           </TaskSection>
-          <TaskSection title="On going" status="onGoing">
-            {todoLoader && <TaskLoaderSkeleton quantity={3} />}
-            {!!todosOnGoing.length &&
-              !todoLoader &&
-              todosOnGoing.map((todo, index) => <Task key={todo.id} index={index} {...todo} />)}
+
+          <TaskSection
+            todos={todosOnGoing}
+            todoLoader={todoLoader}
+            onTodoLoader={() => <TaskLoaderSkeleton />}
+            title="On going"
+            status="onGoing"
+            setOpenModal={setOpenModal}
+            initialNewTodo={initialNewTodo}
+          >
+            {(todo, index) => (
+              <Task
+                key={todo.id}
+                index={index}
+                setTodos={setTodos}
+                todos={todos}
+                {...todo}
+              />
+            )}
           </TaskSection>
-          <TaskSection title="Completed" status="completed">
-            {todoLoader && <TaskLoaderSkeleton quantity={3} />}
-            {!!todosCompleted.length &&
-              !todoLoader &&
-              todosCompleted.map((todo, index) => <Task key={todo.id} index={index} {...todo} />)}
+          <TaskSection
+            todos={todosCompleted}
+            todoLoader={todoLoader}
+            onTodoLoader={() => <TaskLoaderSkeleton />}
+            title="Completed"
+            status="completed"
+            setOpenModal={setOpenModal}
+            initialNewTodo={initialNewTodo}
+          >
+            {(todo, index) => (
+              <Task
+                key={todo.id}
+                index={index}
+                setTodos={setTodos}
+                todos={todos}
+                {...todo}
+              />
+            )}
           </TaskSection>
         </DragContext>
       </main>
-      <TaskInformation />
+      <TaskInformation counterTasks={counterTasks} />
       {openModal && (
         <Modal title="New Task">
-          <TaskForm />
+          <TaskForm
+            setOpenModal={setOpenModal}
+            setTodos={setTodos}
+            todos={todos}
+            todo={todo}
+          />
         </Modal>
       )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

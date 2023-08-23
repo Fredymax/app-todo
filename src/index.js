@@ -1,11 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import TodoProvider from "./context/TodoProvider";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <TodoProvider>
-    <App />
-  </TodoProvider>
-);
+import './App.css'
+import './App-mobile.css'
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<App />)

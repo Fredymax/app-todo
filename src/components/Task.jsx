@@ -1,28 +1,35 @@
-import React, { useState, useContext } from "react";
-import { UserAvatar } from "./UserAvatar";
-import { UserAvatarCount } from "./UserAvatarCount";
-import { IconDrag, IconInbox, IconTrash } from "../Icons";
-import { getAvatars } from "../utils";
-import { TodoContext } from "../context/TodoProvider";
+import { useState } from 'react'
+import { UserAvatar } from './UserAvatar'
+import { UserAvatarCount } from './UserAvatarCount'
+import { IconDrag, IconInbox, IconTrash } from '../Icons'
+import { getAvatars } from '../utils'
 
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from 'react-beautiful-dnd'
 
-export const Task = ({ id, title, description, advance, subTask, category, index }) => {
-  const { setTodos, todos } = useContext(TodoContext);
-
-  const [avatars] = useState(() => getAvatars(category));
+export const Task = ({
+  id,
+  title,
+  description,
+  advance,
+  subTask,
+  category,
+  index,
+  setTodos,
+  todos,
+}) => {
+  const [avatars] = useState(() => getAvatars(category))
 
   const getStyled = (snapshot, draggableProps) => ({
-    rotate: snapshot.isDragging ? "6deg" : "0deg",
+    rotate: snapshot.isDragging ? '6deg' : '0deg',
     ...draggableProps.style,
-  });
+  })
 
   const handleClick = (todoId) => {
-    let _todos = [...todos];
-    const index = _todos.findIndex((todo) => todo.id === todoId);
-    _todos.splice(index, 1);
-    setTodos(_todos);
-  };
+    let _todos = [...todos]
+    const index = _todos.findIndex((todo) => todo.id === todoId)
+    _todos.splice(index, 1)
+    setTodos(_todos)
+  }
 
   return (
     <Draggable draggableId={`todoId_${id}`} index={index}>
@@ -36,7 +43,9 @@ export const Task = ({ id, title, description, advance, subTask, category, index
             style={getStyled(snapshot, provided.draggableProps)}
           >
             <div className="card__header">
-              <div className={`card__title ${category === "personal" ? "orange" : "pink"}`}>
+              <div
+                className={`card__title ${category === 'personal' ? 'orange' : 'pink'}`}
+              >
                 {title}
               </div>
               <div className="button-settings">
@@ -51,7 +60,10 @@ export const Task = ({ id, title, description, advance, subTask, category, index
             <div className="card__text start">{description}</div>
             <div className="card__text end">{advance}%</div>
             <div className="card__progress">
-              <div className="progress" style={{ "--progress-width": advance + "%" }}></div>
+              <div
+                className="progress"
+                style={{ '--progress-width': advance + '%' }}
+              ></div>
             </div>
             <div className="card__footer">
               <div className="avatars">
@@ -68,8 +80,8 @@ export const Task = ({ id, title, description, advance, subTask, category, index
               </div>
             </div>
           </div>
-        );
+        )
       }}
     </Draggable>
-  );
-};
+  )
+}

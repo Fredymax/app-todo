@@ -1,18 +1,14 @@
-import React, { useContext } from "react";
-import { IconUser, IconUsers } from "../Icons";
-import { TodoContext } from "../context/TodoProvider";
-import { useForm } from "../hooks/useForm";
+import { IconUser, IconUsers } from '../Icons'
+import { useForm } from '../hooks/useForm'
 
-export const TaskForm = () => {
-  const { setOpenModal, todo, setTodos, todos } = useContext(TodoContext);
-  const [form, setForm] = useForm(todo);
+export const TaskForm = ({ setOpenModal, todo, setTodos, todos }) => {
+  const [form, setForm] = useForm(todo)
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setTodos([...todos, form]);
-    setOpenModal(false);
-  };
+    e.preventDefault()
+    setTodos([...todos, form])
+    setOpenModal(false)
+  }
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit} className="card__form">
@@ -109,5 +105,5 @@ export const TaskForm = () => {
         </button>
       </div>
     </form>
-  );
-};
+  )
+}

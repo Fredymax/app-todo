@@ -626,7 +626,8 @@ input:checked ~ .form-control-category {
 }
 
 .card.skeleton {
-  min-block-size: 273.938px;
+  block-size: auto;
+  min-block-size: 125px;
   align-items: center;
   justify-content: center;
   background: rgb(242, 242, 242);

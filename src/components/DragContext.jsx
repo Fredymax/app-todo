@@ -1,26 +1,21 @@
-import React, { useContext } from "react";
-import { DragDropContext } from "react-beautiful-dnd";
-import { TodoContext } from "../context/TodoProvider";
+import { DragDropContext } from 'react-beautiful-dnd'
 
-export const DragContext = ({ children }) => {
-  const { setTodos, todos } = useContext(TodoContext);
+export const DragContext = ({ children, setTodos, todos }) => {
   const onDragEnd = ({ draggableId, destination }) => {
-    if (!draggableId || !destination?.droppableId) return;
+    if (!draggableId || !destination?.droppableId) return
 
-    const todoId = draggableId.split("_").pop();
+    const todoId = draggableId.split('_').pop()
+    const _todos = [...todos]
+    const index = _todos.findIndex(({ id }) => id === todoId)
+    _todos[index]['status'] = destination.droppableId
+    setTodos([..._todos])
+  }
 
-    let _todos = [...todos];
-
-    const index = _todos.findIndex(({ id }) => id === todoId);
-    _todos[index]["status"] = destination.droppableId;
-    setTodos([..._todos]);
-  };
-
-  const handlers = { onDragEnd };
+  const handlers = { onDragEnd }
 
   return (
     <div className="task__list">
       <DragDropContext {...handlers}>{children}</DragDropContext>
     </div>
-  );
-};
+  )
+}
